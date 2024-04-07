@@ -13,6 +13,7 @@ namespace NathansSpecflowDesktopFramework.Tests.StepDefinitions
         [Given(@"I create a new document and paste in (.*) characters")]
         public void GivenICreateANewDocumentAndPasteInCharacters(int p0)
         {
+            Thread.Sleep(5000);
             // Perform actions on the application using the driver
             sessionWord.FindElementByName("New blank document").Click();
 

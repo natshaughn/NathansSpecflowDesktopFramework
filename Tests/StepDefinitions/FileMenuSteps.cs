@@ -1,4 +1,5 @@
 using NathansSpecflowDesktopFramework.Drivers;
+using NUnit.Framework;
 using OpenQA.Selenium.Appium.Windows;
 
 namespace NathansSpecflowDesktopFramework.Tests.StepDefinitions
@@ -36,6 +37,19 @@ namespace NathansSpecflowDesktopFramework.Tests.StepDefinitions
         public void WhenISaveDocumentAsAPdfDocumentToTheDesktop()
         {
             throw new PendingStepException();
-        }       
+        }
+
+        [Then(@"the document will be created and saved in the desktop directory")]
+        public void ThenTheDocumentWillBeCreatedAndSavedInTheDesktopDirectory()
+        {
+            sessionWord.FindElementByName("File Tab").Click();
+            Thread.Sleep(3000);
+            sessionWord.FindElementByName("Open").Click();
+            Thread.Sleep(3000);
+            // Get the random file name generated in the previous step
+            string randomFileName = GetRandomFileName();
+            var file = sessionWord.FindElementByName($"{randomFileName}.docx");
+            Assert.IsNotNull(file, $"File '{randomFileName}' was not found in the desktop directory.");
+        }
     }
 }
