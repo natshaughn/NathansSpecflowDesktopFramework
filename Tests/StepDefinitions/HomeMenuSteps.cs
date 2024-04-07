@@ -12,7 +12,8 @@ namespace NathansSpecflowDesktopFramework.Tests.StepDefinitions
 
         [Given(@"I click on a Blank Document from the Home menu")]
         public void GivenIClickOnABlankDocumentFromTheHomeMenu()
-        {           
+        {
+            Thread.Sleep(5000);
             // Perform actions on the application using the driver
             sessionWord.FindElementByName("New blank document").Click();          
         }
