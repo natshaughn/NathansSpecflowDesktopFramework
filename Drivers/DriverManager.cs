@@ -1,39 +1,51 @@
 ﻿using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Windows;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace NathansSpecflowDesktopFramework.Drivers
 {
     public class DriverManager
     {
-        private static WindowsDriver<WindowsElement>? driver;
+        public const string DriverUrl = "http://127.0.0.1:4723";
 
-        public static WindowsDriver<WindowsElement> GetDriver()
+        public static WindowsDriver<WindowsElement> Setup()
         {
-            if (driver == null)
+            Process.GetProcessesByName("WinAppDriver").ToList().ForEach(x =>
             {
-                // Initialize AppiumOptions and set desired capabilities
-                AppiumOptions options = new AppiumOptions();
-                options.AddAdditionalCapability("app", @"C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE");
+                x.Kill();
+                x.WaitForExit();
+            });
 
-                // Initialize Appium Windows Driver
-                driver = new WindowsDriver<WindowsElement>(new Uri("http://127.0.0.1:4723"), options);
-            }
-            return driver;
+
+            Process.GetProcessesByName("WINWORD").ToList().ForEach(x =>
+            {
+                x.Kill();
+                x.WaitForExit();
+            });
+
+            Process.Start(@"C:\Program Files (x86)\Windows Application Driver\WinAppDriver.exe");
+
+            // Initialise AppiumOptions and set desired capabilities
+            AppiumOptions options = new AppiumOptions();
+            options.AddAdditionalCapability("app", @"C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE");
+            options.AddAdditionalCapability("deviceName", "WindowsPC");
+            options.AddAdditionalCapability("ms:waitForAppLaunch", "10");
+
+            // Initialise Appium Windows Driver
+            WindowsDriver<WindowsElement> desktopSession = new WindowsDriver<WindowsElement>(new Uri(DriverUrl), options);
+
+            return desktopSession;
         }
 
-        public static void QuitDriver()
+        public static void QuitSession(WindowsDriver<WindowsElement> desktopSession)
         {
-            if (driver != null)
+            if (desktopSession != null)
             {
-                driver.Quit();
-                driver = null; // Reset the driver instance after quitting
+                desktopSession.Close();
+                desktopSession.Quit();
             }
+
+            Process.GetProcessesByName("WinAppDriver").ToList().ForEach(x => x.Kill());
         }
     }
 }
-

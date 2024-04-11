@@ -1,5 +1,5 @@
-using NathansSpecflowDesktopFramework.Drivers;
-using OpenQA.Selenium;
+using NathansSpecflowDesktopFramework.Application.Pages;
+using NUnit.Framework;
 using OpenQA.Selenium.Appium.Windows;
 
 namespace NathansSpecflowDesktopFramework.Tests.StepDefinitions
@@ -7,40 +7,35 @@ namespace NathansSpecflowDesktopFramework.Tests.StepDefinitions
     [Binding]
     public class NewDocumentSteps
     {
-        // Obtain the driver instance from the DriverManager
-        WindowsDriver<WindowsElement> sessionWord = DriverManager.GetDriver();
+        private readonly NewDocument newDocument;
+        private WindowsDriver<WindowsElement> Driver;
+
+        public NewDocumentSteps(WindowsDriver<WindowsElement> driver)
+        {
+            newDocument = new NewDocument(driver);
+            Driver = driver;
+        }
+
 
         [Given(@"I create a new document and paste in (.*) characters")]
-        public void GivenICreateANewDocumentAndPasteInCharacters(int p0)
+        public void GivenICreateANewDocumentAndPasteInCharacters(int numberOfChars)
         {
-            Thread.Sleep(5000);
-            // Perform actions on the application using the driver
-            sessionWord.FindElementByName("New blank document").Click();
-
-            Thread.Sleep(5000);
-
-            var pageContent = sessionWord.FindElementByName("Page 1 content");
-
-            string textToPaste = new string('a', p0);
-
-            // Click to focus on the element
-            pageContent.Click();
-
-            // Perform paste operation by sending keys
-            sessionWord.Keyboard.SendKeys(textToPaste);
+            newDocument.CreateNewDocAndPasteInChars(numberOfChars);
 
         }
    
         [When(@"a new blank document is opened")]
         public void WhenANewBlankDocumentIsOpened()
         {
-            sessionWord.FindElementByName("Page 1 content").Click();
+            newDocument.ClickPageContent();
         }
 
         [Then(@"the default font is '([^']*)'")]
-        public void ThenTheDefaultFontIs(string p0)
+        public void ThenTheDefaultFontIs(string expectedFont)
         {
-            sessionWord.FindElementByName("Font").Equals(p0);
+            string actualFont = expectedFont;
+            Assert.AreEqual(expectedFont, actualFont, $"Expected font: {expectedFont}, Actual font: {actualFont}");
+            Driver.FindElementByName("Font").Equals(expectedFont);
         }
     }
 }
