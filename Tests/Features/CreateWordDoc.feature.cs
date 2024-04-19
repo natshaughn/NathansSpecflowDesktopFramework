@@ -97,7 +97,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.When("a new blank document is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 8
- testRunner.Then("the default font is \'Calibri (Body)\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("the default font is \'Calibri (Boduy)\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

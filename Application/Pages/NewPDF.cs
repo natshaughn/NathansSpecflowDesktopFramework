@@ -26,13 +26,10 @@ namespace NathansSpecflowDesktopFramework.Application.Pages
             {
                 using (PdfDocument pdfDocument = new PdfDocument(reader))
                 {
-                    for (int page = 1; page <= pdfDocument.GetNumberOfPages(); page++)
-                    {
-                        PdfPage pdfPage = pdfDocument.GetPage(page);
-                        ITextExtractionStrategy strategy = new SimpleTextExtractionStrategy();
-                        string text = PdfTextExtractor.GetTextFromPage(pdfPage, strategy);
-                        textBuilder.Append(text);
-                    }
+                    PdfPage pdfPage = pdfDocument.GetPage(1);
+                    ITextExtractionStrategy strategy = new SimpleTextExtractionStrategy();
+                    string text = PdfTextExtractor.GetTextFromPage(pdfPage, strategy);
+                    textBuilder.Append(text);
                 }
             }
 

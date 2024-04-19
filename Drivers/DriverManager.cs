@@ -23,6 +23,12 @@ namespace NathansSpecflowDesktopFramework.Drivers
                 x.WaitForExit();
             });
 
+            /*Process.GetProcessesByName("C:\\Progra").ToList().ForEach(x => 
+            {
+                x.Kill();
+                x.WaitForExit();
+            });*/
+
             Process.Start(@"C:\Program Files (x86)\Windows Application Driver\WinAppDriver.exe");
 
             // Initialise AppiumOptions and set desired capabilities
@@ -43,9 +49,12 @@ namespace NathansSpecflowDesktopFramework.Drivers
             {
                 desktopSession.Close();
                 desktopSession.Quit();
-            }
+                
+            } 
 
+            Process.GetProcessesByName("WINWORD").ToList().ForEach(x => x.Kill());
             Process.GetProcessesByName("WinAppDriver").ToList().ForEach(x => x.Kill());
+            Process.GetProcessesByName("Acrobat").ToList().ForEach(x => x.Kill());
         }
     }
 }
