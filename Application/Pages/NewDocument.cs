@@ -16,7 +16,14 @@ namespace NathansSpecflowDesktopFramework.Application.Pages
 
         public ElementWrapper FontOption => new ElementWrapper(driver, By.Name("Font"));
         public ElementWrapper PageContent => new ElementWrapper(driver, By.Name("Page 1 content"));
-    
+        public ElementWrapper OpenFontButton => new ElementWrapper(driver, By.Name("Open"));
+        public ElementWrapper CalibriFontOption => new ElementWrapper(driver, By.Name("Calibri (Body)"));
+
+        public void ClickOpenFontButton()
+        {
+            OpenFontButton.Click();
+        }
+
         public void ClickPageContent()
         {
             PageContent.Click();

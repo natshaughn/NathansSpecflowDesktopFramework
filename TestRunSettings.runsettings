@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<RunSettings>
+	<TestRunParameters>
+		<!-- App Info -->
+		<Parameter name="BaseUrl" value="http://127.0.0.1:4723" />
+	</TestRunParameters>
+</RunSettings>

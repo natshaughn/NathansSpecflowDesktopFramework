@@ -24,6 +24,7 @@ namespace NathansSpecflowDesktopFramework.Tests.StepDefinitions
             PDFText = PDFText.Trim();
             PDFText = PDFText.Replace("\n", ""); // Remove newline characters
 
+            Console.WriteLine(PDFText);
             // Compare the extracted text with the expected text
             Assert.That(PDFText, Is.EqualTo(expectedText));
         }

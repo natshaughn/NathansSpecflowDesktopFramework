@@ -31,6 +31,7 @@ namespace NathansSpecflowDesktopFramework.Tests.StepDefinitions
         {
             // Get the random file name 
             string fileName = FileMenu.ReturnFileName();
+            Console.WriteLine(fileName);
 
             // Assert that the document with the random file name exists on the desktop
             Assert.That(File.Exists($"C:\\Users\\nathan.shaughnessy\\Downloads\\{fileName}.docx"), Is.True, $"File '{fileName}' was not found in the desktop directory.");
@@ -42,6 +43,7 @@ namespace NathansSpecflowDesktopFramework.Tests.StepDefinitions
         {
             // Get the random file name 
             string fileName = FileMenu.ReturnFileName();
+            Console.WriteLine(fileName);
 
             // Assert that the PDF with the random file name exists on the desktop
             Assert.That(File.Exists($"C:\\Users\\nathan.shaughnessy\\Downloads\\{fileName}.pdf"), Is.True, $"PDF '{fileName}' was not found in the desktop directory.");

@@ -34,7 +34,11 @@ namespace NathansSpecflowDesktopFramework.Application.Elements
         // Get the text of the element
         public string GetElementText()
         {
+            /*IWebElement element = FindElement();
+            return element.Text;*/
+
             return FindElement().Text;
         }
+
     }
 }
