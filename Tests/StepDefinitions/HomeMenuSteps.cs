@@ -16,7 +16,6 @@ namespace NathansSpecflowDesktopFramework.Tests.StepDefinitions
         [Given(@"I click on a Blank Document from the Home menu")]
         public void GivenIClickOnABlankDocumentFromTheHomeMenu()
         {
-            Thread.Sleep(3000);
             homeMenu.ClickNewBlankDocButton();   
         }
     }

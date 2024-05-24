@@ -1,5 +1,4 @@
 ﻿using NathansSpecflowDesktopFramework.Application.Elements;
-using OpenQA.Selenium;
 
 namespace NathansSpecflowDesktopFramework.Application.Pages
 {
@@ -13,44 +12,40 @@ namespace NathansSpecflowDesktopFramework.Application.Pages
             this.driver = driver;
         }
 
-        public ElementWrapper FileTabButton => new ElementWrapper(driver, By.Name("File Tab"));
-        public ElementWrapper SaveAsButton => new ElementWrapper(driver, By.Name("Save As"));
-        public ElementWrapper EnterFileNameInput => new ElementWrapper(driver, By.Name("Enter file name here"));
         public ElementWrapper Dropdown => new ElementWrapper(driver, By.Name("OneDrive - ROQ IT"));
         public ElementWrapper DownloadsOption => new ElementWrapper(driver, By.Name("Downloads (pinned)"));
-        public ElementWrapper SaveOption => new ElementWrapper(driver, By.Name("Save"));
-        public ElementWrapper SaveAsType => new ElementWrapper(driver, By.Name("Save as type"));
+        public ElementWrapper EnterFileNameInput => new ElementWrapper(driver, By.Name("Enter file name here"));
+        public ElementWrapper FileTabButton => new ElementWrapper(driver, By.Name("File Tab"));
+        public ElementWrapper GetFileName => new ElementWrapper(driver, By.Name($"{randomFileName}.docx"));
         public ElementWrapper PdfOption => new ElementWrapper(driver, By.Name("PDF (*.pdf)"));
-        public ElementWrapper GetFileName => new ElementWrapper(driver, By.Name($"{randomFileName}.docx"));     
+        public ElementWrapper SaveAsButton => new ElementWrapper(driver, By.Name("Save As"));
+        public ElementWrapper SaveAsType => new ElementWrapper(driver, By.Name("Save as type"));
+        public ElementWrapper SaveOption => new ElementWrapper(driver, By.Name("Save"));
 
-        public void ClickFileTabButton()
+        public void ClickDownloadsOption()
         {
-            FileTabButton.Click();
-        }
-
-        public void ClickSaveAsButton()
-        {
-            SaveAsButton.Click();
-        }
-
-        public void EnterFileName()
-        {
-            EnterFileNameInput.SendKeys(randomFileName);
+            DownloadsOption.WaitForElement();
+            DownloadsOption.Click();
         }
 
         public void ClickDropdown()
         {
             Dropdown.Click();
+            SpinWait.SpinUntil(() => DownloadsOption.Equals($"{DownloadsOption}"), TimeSpan.FromSeconds(5));
         }
 
-        public void ClickDownloadsOption() 
-        { 
-            DownloadsOption.Click();
+        public void ClickFileTabButton()
+        {
+            FileTabButton.Click();
         }
-
-        public void ClickSave() 
-        { 
+        public void ClickSave()
+        {
             SaveOption.Click();
+        }
+
+        public void ClickSaveAsButton()
+        {
+            SaveAsButton.Click();
         }
 
         public void ClickSaveAsType()
@@ -60,7 +55,13 @@ namespace NathansSpecflowDesktopFramework.Application.Pages
 
         public void ClickPdfOption()
         {
+            PdfOption.WaitForElement();
             PdfOption.Click();
+        }
+
+        public void EnterFileName()
+        {
+            EnterFileNameInput.SendKeys(randomFileName);
         }
 
         public static string ReturnFileName()
@@ -73,11 +74,12 @@ namespace NathansSpecflowDesktopFramework.Application.Pages
             ClickFileTabButton();
             ClickSaveAsButton();
             EnterFileName();
-            ClickDropdown();
-            Thread.Sleep(3000);
+            ClickDropdown();          
             ClickDownloadsOption();
             ClickSave();
-            Thread.Sleep(5000);
+            //FileTabButton.WaitForElement();
+            SpinWait.SpinUntil(() => FileTabButton.Equals($"{FileTabButton}"), TimeSpan.FromSeconds(5));
+
         }
 
         public void SavePDFDocumentToDesktop()
@@ -88,10 +90,9 @@ namespace NathansSpecflowDesktopFramework.Application.Pages
             ClickSaveAsType();
             ClickPdfOption();
             ClickDropdown();
-            Thread.Sleep(3000);
             ClickDownloadsOption();
             ClickSave();
-            Thread.Sleep(5000);
+            SpinWait.SpinUntil(() => FileTabButton.Equals($"{FileTabButton}"), TimeSpan.FromSeconds(5));
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using OpenQA.Selenium;
-
-namespace NathansSpecflowDesktopFramework.Application.Elements
+﻿namespace NathansSpecflowDesktopFramework.Application.Elements
 {
     public class ElementWrapper
     {
@@ -12,33 +10,29 @@ namespace NathansSpecflowDesktopFramework.Application.Elements
             this.driver = driver;
             this.by = by;
         }
-
-        // Find a single element 
-        public IWebElement FindElement()
-        {
-            return driver.FindElement(by);
-        }
-
-        // Click an element 
         public void Click()
         {
             FindElement().Click();
         }
 
-        // Type text 
-        public void SendKeys(string text)
+        public IWebElement FindElement()
         {
-            FindElement().SendKeys(text); 
+            return driver.FindElement(by);
         }
 
-        // Get the text of the element
         public string GetElementText()
         {
-            /*IWebElement element = FindElement();
-            return element.Text;*/
-
             return FindElement().Text;
         }
+        public void SendKeys(string text)
+        {
+            FindElement().SendKeys(text);
+        }
 
+        public void WaitForElement()
+        {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
+            wait.Until(ExpectedConditions.ElementExists(by));
+        }
     }
 }
