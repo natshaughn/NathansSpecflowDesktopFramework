@@ -23,12 +23,6 @@ namespace NathansSpecflowDesktopFramework.Drivers
                 x.WaitForExit();
             });
 
-            /*Process.GetProcessesByName("C:\\Progra").ToList().ForEach(x => 
-            {
-                x.Kill();
-                x.WaitForExit();
-            });*/
-
             Process.Start(@"C:\Program Files (x86)\Windows Application Driver\WinAppDriver.exe");
 
             // Initialise AppiumOptions and set desired capabilities

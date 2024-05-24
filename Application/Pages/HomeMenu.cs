@@ -1,5 +1,4 @@
 ﻿using NathansSpecflowDesktopFramework.Application.Elements;
-using OpenQA.Selenium;
 
 namespace NathansSpecflowDesktopFramework.Application.Pages
 {
@@ -16,6 +15,7 @@ namespace NathansSpecflowDesktopFramework.Application.Pages
 
         public void ClickNewBlankDocButton()
         {
+            NewBlankDocButton.WaitForElement();
             NewBlankDocButton.Click();
         }
     }
