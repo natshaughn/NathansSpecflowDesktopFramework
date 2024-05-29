@@ -18,7 +18,9 @@ namespace NathansSpecflowDesktopFramework.Application.Pages
 
         public string ExtractTextFromPDF()
         {
-            string filePath = $@"C:\Users\nathan.shaughnessy\Downloads\{fileName}.pdf";
+            string userProfile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            string filePath = Path.Combine(userProfile, "Downloads", $"{fileName}.pdf");
+
             StringBuilder textBuilder = new StringBuilder();
 
             using (PdfReader reader = new PdfReader(filePath))

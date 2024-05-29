@@ -13,9 +13,9 @@ namespace NathansSpecflowDesktopFramework.Application.Pages
             this.driver = driver;
             homeMenu = new HomeMenu(driver); 
         }
-        public ElementWrapper FontOption => new ElementWrapper(driver, By.Name("Font"));
-        public ElementWrapper OpenFontButton => new ElementWrapper(driver, By.Name("Open"));
-        public ElementWrapper PageContent => new ElementWrapper(driver, By.Name("Page 1 content"));
+        public ElementWrapper FontOption => new(driver, By.Name("Font"));
+        public ElementWrapper OpenFontButton => new(driver, By.Name("Open"));
+        public ElementWrapper PageContent => new(driver, By.Name("Page 1 content"));
 
         public void ClickOpenFontButton()
         {

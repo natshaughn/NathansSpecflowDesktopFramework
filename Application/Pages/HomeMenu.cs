@@ -11,7 +11,7 @@ namespace NathansSpecflowDesktopFramework.Application.Pages
             this.driver = driver;
         }
 
-        public ElementWrapper NewBlankDocButton => new ElementWrapper(driver, By.Name("New blank document"));
+        public ElementWrapper NewBlankDocButton => new(driver, By.Name("New blank document"));
 
         public void ClickNewBlankDocButton()
         {

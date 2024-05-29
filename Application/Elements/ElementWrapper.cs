@@ -15,6 +15,11 @@
             FindElement().Click();
         }
 
+        public bool Exists()
+        {
+            return driver.FindElements(by).Count() > 0;
+        }
+
         public IWebElement FindElement()
         {
             return driver.FindElement(by);
@@ -33,6 +38,11 @@
         {
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
             wait.Until(ExpectedConditions.ElementExists(by));
+        }
+
+        public void WaitUntilExists()
+        {
+            SpinWait.SpinUntil(() => Exists(), TimeSpan.FromSeconds(30));
         }
     }
 }
