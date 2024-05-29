@@ -22,7 +22,7 @@ namespace NathansSpecflowDesktopFramework.Tests.StepDefinitions
         {
             string PDFText = newPDF.ExtractTextFromPDF();
             PDFText = PDFText.Trim();
-            PDFText = PDFText.Replace("\n", ""); // Remove newline characters
+            PDFText = PDFText.Replace("\n", ""); 
             Assert.That(PDFText, Is.EqualTo(expectedText), $"Expected PDF Text: {expectedText}, Actual font: {PDFText}");
         }
     }

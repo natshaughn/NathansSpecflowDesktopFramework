@@ -25,13 +25,11 @@ namespace NathansSpecflowDesktopFramework.Drivers
 
             Process.Start(@"C:\Program Files (x86)\Windows Application Driver\WinAppDriver.exe");
 
-            // Initialise AppiumOptions and set desired capabilities
             AppiumOptions options = new AppiumOptions();
             options.AddAdditionalCapability("app", @"C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE");
             options.AddAdditionalCapability("deviceName", "WindowsPC");
             options.AddAdditionalCapability("ms:waitForAppLaunch", "10");
 
-            // Initialise Appium Windows Driver
             WindowsDriver<WindowsElement> desktopSession = new WindowsDriver<WindowsElement>(new Uri(DriverUrl), options);
 
             return desktopSession;

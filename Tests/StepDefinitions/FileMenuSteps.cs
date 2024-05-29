@@ -30,8 +30,11 @@ namespace NathansSpecflowDesktopFramework.Tests.StepDefinitions
         public void ThenTheDocumentWillBeCreatedAndSavedInTheDesktopDirectory()
         {
             string fileName = FileMenu.ReturnFileName();
-            SpinWait.SpinUntil(() => fileName.Equals($"{fileName}"), TimeSpan.FromSeconds(10));
-            Assert.That(File.Exists($"C:\\Users\\nathan.shaughnessy\\Downloads\\{fileName}.docx"), Is.True, $"File '{fileName}' was not found.");
+            string downloadsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
+            string filePath = Path.Combine(downloadsPath, $"{fileName}.docx");
+
+            SpinWait.SpinUntil(() => File.Exists(filePath), TimeSpan.FromSeconds(30));
+            Assert.That(File.Exists(filePath), Is.True, $"File '{filePath}' was not found."); 
         }
 
 
@@ -39,8 +42,11 @@ namespace NathansSpecflowDesktopFramework.Tests.StepDefinitions
         public void ThenAPDFFileWillBeCreatedInTheDesktopDirectory()
         {
             string fileName = FileMenu.ReturnFileName();
-            SpinWait.SpinUntil(() => fileName.Equals($"{fileName}"), TimeSpan.FromSeconds(10));
-            Assert.That(File.Exists($"C:\\Users\\nathan.shaughnessy\\Downloads\\{fileName}.pdf"), Is.True, $"PDF '{fileName}' was not found.");
+            string downloadsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
+            string filePath = Path.Combine(downloadsPath, $"{fileName}.pdf");
+
+            SpinWait.SpinUntil(() => File.Exists(filePath), TimeSpan.FromSeconds(30));
+            Assert.That(File.Exists(filePath), Is.True, $"PDF '{filePath}' was not found.");
         }
     }
 }

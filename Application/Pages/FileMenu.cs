@@ -12,15 +12,15 @@ namespace NathansSpecflowDesktopFramework.Application.Pages
             this.driver = driver;
         }
 
-        public ElementWrapper Dropdown => new ElementWrapper(driver, By.Name("OneDrive - ROQ IT"));
-        public ElementWrapper DownloadsOption => new ElementWrapper(driver, By.Name("Downloads (pinned)"));
-        public ElementWrapper EnterFileNameInput => new ElementWrapper(driver, By.Name("Enter file name here"));
-        public ElementWrapper FileTabButton => new ElementWrapper(driver, By.Name("File Tab"));
-        public ElementWrapper GetFileName => new ElementWrapper(driver, By.Name($"{randomFileName}.docx"));
-        public ElementWrapper PdfOption => new ElementWrapper(driver, By.Name("PDF (*.pdf)"));
-        public ElementWrapper SaveAsButton => new ElementWrapper(driver, By.Name("Save As"));
-        public ElementWrapper SaveAsType => new ElementWrapper(driver, By.Name("Save as type"));
-        public ElementWrapper SaveOption => new ElementWrapper(driver, By.Name("Save"));
+        public ElementWrapper Dropdown => new(driver, By.Name("OneDrive - ROQ IT"));
+        public ElementWrapper DownloadsOption => new(driver, By.Name("Downloads (pinned)"));
+        public ElementWrapper EnterFileNameInput => new(driver, By.Name("Enter file name here"));
+        public ElementWrapper FileTabButton => new(driver, By.Name("File Tab"));
+        public ElementWrapper GetFileName => new(driver, By.Name($"{randomFileName}.docx"));
+        public ElementWrapper PdfOption => new(driver, By.Name("PDF (*.pdf)"));
+        public ElementWrapper SaveAsButton => new(driver, By.Name("Save As"));
+        public ElementWrapper SaveAsType => new(driver, By.Name("Save as type"));
+        public ElementWrapper SaveOption => new(driver, By.Name("Save"));
 
         public void ClickDownloadsOption()
         {
@@ -31,7 +31,7 @@ namespace NathansSpecflowDesktopFramework.Application.Pages
         public void ClickDropdown()
         {
             Dropdown.Click();
-            SpinWait.SpinUntil(() => DownloadsOption.Equals($"{DownloadsOption}"), TimeSpan.FromSeconds(5));
+            DownloadsOption.WaitUntilExists();
         }
 
         public void ClickFileTabButton()
@@ -77,8 +77,7 @@ namespace NathansSpecflowDesktopFramework.Application.Pages
             ClickDropdown();          
             ClickDownloadsOption();
             ClickSave();
-            //FileTabButton.WaitForElement();
-            SpinWait.SpinUntil(() => FileTabButton.Equals($"{FileTabButton}"), TimeSpan.FromSeconds(5));
+            FileTabButton.WaitUntilExists();
 
         }
 
@@ -92,7 +91,7 @@ namespace NathansSpecflowDesktopFramework.Application.Pages
             ClickDropdown();
             ClickDownloadsOption();
             ClickSave();
-            SpinWait.SpinUntil(() => FileTabButton.Equals($"{FileTabButton}"), TimeSpan.FromSeconds(5));
+            FileTabButton.WaitUntilExists();
         }
     }
 }
